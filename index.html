@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <title>AWOOOO</title>
+        <meta property="og:locale" content="ja_JP">
+        <meta property="og:title" content="AWOOOO">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="直接やSNSでは言えない言葉をここで叫んでみませんか？投稿したメッセージは30秒後に削除されます。">
+        <meta property="og:url" content="http://unbam.github.io/awoooo/">
+        <meta property="og:image" content="img/logo.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <link rel="apple-touch-icon" href="img/logo.png">
+        <script src="https://cdn.mlkcca.com/v2.0.0/milkcocoa.js"></script>
+        <style>
+        .shout-btn,p{font-size:14pt;font-weight:700}#time,.sns-area,h1,p{text-align:center}#time,.shout-btn,p{font-weight:700}body{margin:0;padding:0;height:100%;background:url(img/IMG_8977.JPG) center center no-repeat fixed #d0ab87;background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;-webkit-text-size-adjust:100%;color:#561423;font-family:'ヒラギノ丸ゴ Pro W4','ヒラギノ丸ゴ Pro','Hiragino Maru Gothic Pro','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','HG丸ｺﾞｼｯｸM-PRO',HGMaruGothicMPRO}.contents,footer{margin:auto}footer{height:110px}.wrapper{position:relative;width:100%;height:100%}#board li:after,#board li:before{position:absolute;display:block;content:''}.title{display:block;height:38px;background:url(img/title.png) center top no-repeat;text-indent:-9999px}.message-area{margin-top:5px;margin-left:auto;margin-right:auto;width:360px}.profile-area,.shout-area{margin-top:10px;margin-left:auto;margin-right:auto}.shout-area{width:100px}.shout-btn{width:100px;background-color:transparent;border:3px solid #561423;color:#561423;cursor:pointer}.profile,.profile-area{width:60px;height:60px}#message{margin:0;padding:0;width:360px;font-size:16px}#board{margin:5px auto;padding:0;width:520px;overflow-y:auto;color:#FFF}#board::-webkit-scrollbar{width:7px;height:7px;border-radius:4px;background:#561423}#board::-webkit-scrollbar-thumb{border-radius:4px;background:#de4754}#board li{position:relative;margin:5px 0!important;list-style-type:none!important;list-style-image:none!important;padding:0 0 5px 20px}#board li:before{top:20px;left:0;width:98%;height:0;border-bottom:1px dashed #aaa}#board li:after{top:7px;left:5px;width:5px;height:5px;background:#aaa;border-radius:5px}#time{display:inline-block;width:100%}@media screen and (max-width:480px){.shout-btn,p{font-size:10.5pt}h1{margin:10px 0}p{margin:0}.message-area{margin-top:0;width:300px}.shout-area{margin-top:2px}#message{width:300px}#board{width:100%;font-size:8.5pt}#time{font-size:10pt}}
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="contents">
+                <h1><a class="title" href="#">AWOOOO</a></h1>
+                <p>直接やSNSでは言えない言葉をここで叫んでみませんか？投稿したメッセージは30秒後に削除されます。</p>
+                <span id="time"></span>
+                <div class="message-area">
+                    <input id="message" type="text" maxlength="30" onkeypress="keyPress(event.keyCode);">
+                </div>
+                <div class="shout-area">
+                    <button class="shout-btn" type="button" onclick="shout();">叫ぶ</button>
+                </div>
+                <ul id="board"></ul>
+            </div>
+            <footer>
+                <div class="sns-area">
+                    <a class="twitter-share-button" href="https://twitter.com/share" 
+                        data-url="http://unbam.github.io/awoooo/" 
+                        data-hashtags="AWOOOO,叫ぶ,告白" data-text="AWOOOO" data-dnt="true">Tweet</a>
+                </div>
+                <div class="profile-area">
+                    <a href="https://twitter.com/tkmssh" target="_blank"><img class="profile" src="img/profile.png" alt="profile"></a>
+                </div>
+            </footer>
+        </div>
+        <script>
+            var message, board;
+            var ua = (function(u){
+                return {
+                    Tablet:(u.indexOf("windows") != -1 && u.indexOf("touch") != -1)
+                        || u.indexOf("ipad") != -1
+                        || (u.indexOf("android") != -1 && u.indexOf("mobile") == -1)
+                        || (u.indexOf("firefox") != -1 && u.indexOf("tablet") != -1)
+                        || u.indexOf("kindle") != -1
+                        || u.indexOf("silk") != -1
+                        || u.indexOf("playbook") != -1,
+                    Mobile:(u.indexOf("windows") != -1 && u.indexOf("phone") != -1)
+                        || u.indexOf("iphone") != -1
+                        || u.indexOf("ipod") != -1
+                        || (u.indexOf("android") != -1 && u.indexOf("mobile") != -1)
+                        || (u.indexOf("firefox") != -1 && u.indexOf("mobile") != -1)
+                        || u.indexOf("blackberry") != -1
+                }
+            })(window.navigator.userAgent.toLowerCase());
+            var milkcocoa = new MilkCocoa('seaiknmwye7.mlkcca.com');
+            var ds = milkcocoa.dataStore('awoooo');
+            var st = ds.stream().sort('asc');
+
+            if(window.addEventListener) {
+                window.addEventListener('load', shareButtonReadSyncer, false);
+            }
+            else {
+                window.attachEvent('onload', shareButtonReadSyncer);
+            }
+
+            window.onload = function(){
+                message = document.getElementById('message');
+                board = document.getElementById('board');
+                changeBoardSize();
+
+                setInterval(function() {
+                    getTime();
+                    getShouts();
+                }, 1000);
+            }
+
+            window.onresize = function() {
+                changeBoardSize();
+            };
+
+            function getTime() {
+                var date = new Date();
+                var format = 'hh:mm:ss';
+                format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+                format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+                format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+                document.getElementById('time').textContent = format;
+                return date.getTime().toString();
+            } 
+
+            function shout() {
+                if(message.value == '') {
+                    return;
+                }
+
+                ds.set(getTime(), {message : message.value},function(err, data){
+                    message.value = '';
+                });
+            }
+
+            function getShouts() {
+                if(board.childNodes.length > 0) {
+                    var time = new Date().getTime() - 30000;
+                    for(var i in board.childNodes) {
+                        if(board.childNodes[i].tagName != "LI") {
+                            continue;
+                        }
+
+                        var child = board.childNodes[i];
+                        if(child.id < time) {
+                            board.removeChild(child);
+                            ds.remove(child.id);
+                        }
+                    }
+                }
+
+                st.next(function(err, data){
+                    for(var i in data) {
+                        if(document.getElementById(data[i].id) != null) {
+                            continue;
+                        }
+
+                        var list = document.createElement('li');
+                        list.id = data[i].id;
+                        list.innerHTML = data[i].value.message;
+                        board.insertBefore(list, board.firstChild);
+                    }
+                });
+            }
+
+            function shareButtonReadSyncer() {
+
+                // Twitter
+                window.twttr = (function(d, s, id){
+                    var js,fjs = d.getElementsByTagName(s)[0],t = window.twttr || {};
+                    if(d.getElementById(id)) return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = 'https://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js,fjs);
+                    t._e = [];
+                    t.ready = function(f){ t._e.push(f); };
+                    return t;
+                }(document, 'script', 'twitter-wjs'));
+            }
+
+            function changeBoardSize() {
+                if(ua.Mobile || ua.Tablet) {
+                    board.style.height = (window.screen.height / 2.5).toString() + 'px';
+                }
+                else {
+                    board.style.height = ((window.innerHeight / 2) + 10).toString() + 'px';
+                }
+            }
+
+            function keyPress(code) {
+                if(13 === code) {
+                    shout();
+                }
+            }
+        </script>
+    </body>
+</html>
