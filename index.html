@@ -108,7 +108,7 @@
             } 
 
             function shout() {
-                if(message.value == '') {
+                if(message.value == '' || message.value.match(/^https?:\/\//)) {
                     return;
                 }
 
