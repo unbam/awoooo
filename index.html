@@ -141,7 +141,7 @@
 
                         var list = document.createElement('li');
                         list.id = data[i].id;
-                        list.innerHTML = data[i].value.message;
+                        list.appendChild(document.createTextNode(data[i].value.message));
                         board.insertBefore(list, board.firstChild);
                     }
                 });
@@ -178,13 +178,12 @@
                 }
             }
 
-            function escapeHtml(str) {
-                str = str.replace(/&/g, '&amp;');
-                str = str.replace(/</g, '&lt;');
-                str = str.replace(/>/g, '&gt;');
-                str = str.replace(/"/g, '&quot;');
-                str = str.replace(/'/g, '&#39;');
-                return str;
+            function escapeHtml(s) {
+                return s.replace( /&/g, "&amp;" )
+                       .replace( /</g, "&lt;" )
+                       .replace( />/g, "&gt;" )
+                       .replace( /"/g, "&quot;" )
+                       .replace( /'/g, "&#x27;" );
             }
         </script>
     </body>
