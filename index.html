@@ -139,9 +139,14 @@
                             continue;
                         }
 
+                        var m = data[i].value.message;
+                        if(m.length > 30) {
+                            m = m.substring(1, 30);
+                        }
+
                         var list = document.createElement('li');
                         list.id = data[i].id;
-                        list.appendChild(document.createTextNode(data[i].value.message));
+                        list.appendChild(document.createTextNode(m));
                         board.insertBefore(list, board.firstChild);
                     }
                 });
