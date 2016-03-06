@@ -144,6 +144,10 @@
                             m = m.substring(1, 30);
                         }
 
+                        if(m == '' || m.match(/^https?:\/\//)) {
+                            continue;
+                        }
+
                         var list = document.createElement('li');
                         list.id = data[i].id;
                         list.appendChild(document.createTextNode(m));
