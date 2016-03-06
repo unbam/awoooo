@@ -112,7 +112,7 @@
                     return;
                 }
 
-                ds.set(getTime(), {message : escapeHtml(message.value)},function(err, data){
+                ds.set(getTime(), {message : encodeURIComponent(message.value)},function(err, data){
                     message.value = '';
                 });
             }
@@ -139,7 +139,7 @@
                             continue;
                         }
 
-                        var m = data[i].value.message;
+                        var m = decodeURIComponent(data[i].value.message);
                         if(m.length > 30) {
                             m = m.substring(1, 30);
                         }
