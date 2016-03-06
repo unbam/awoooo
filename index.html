@@ -145,6 +145,7 @@
                         }
 
                         if(m == '' || m.match(/^https?:\/\//)) {
+                            ds.remove(data[i].id);
                             continue;
                         }
 
