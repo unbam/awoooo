@@ -32,12 +32,13 @@
             <div class="contents">
                 <h1><a class="title" href="#">AWOOOO</a></h1>
                 <p>直接やSNSでは言えない言葉をここで叫んでみませんか？投稿したメッセージは30秒後に削除されます。</p>
+                <p>現在APIの規制により利用を停止しています。</p>
                 <span id="time"></span>
                 <div class="message-area">
-                    <input id="message" type="text" maxlength="30" onkeypress="keyPress(event.keyCode);">
+                    <input id="message" type="text" maxlength="30" onkeypress="keyPress(event.keyCode);" value="現在叫べません...ごめんね" disabled>
                 </div>
                 <div class="shout-area">
-                    <button class="shout-btn" type="button" onclick="shout();">叫ぶ</button>
+                    <button class="shout-btn" type="button" onclick="shout();" disabled>叫ぶ</button>
                 </div>
                 <ul id="board"></ul>
             </div>
@@ -112,13 +113,13 @@
                     return;
                 }
 
-                ds.set(getTime(), {message : encodeURIComponent(message.value)},function(err, data){
+                /*ds.set(getTime(), {message : encodeURIComponent(message.value)},function(err, data){
                     message.value = '';
-                });
+                });*/
             }
 
             function getShouts() {
-                if(board.childNodes.length > 0) {
+                /*if(board.childNodes.length > 0) {
                     var time = new Date().getTime() - 30000;
                     for(var i in board.childNodes) {
                         if(board.childNodes[i].tagName != "LI") {
@@ -154,7 +155,7 @@
                         list.appendChild(document.createTextNode(m));
                         board.insertBefore(list, board.firstChild);
                     }
-                });
+                });*/
             }
 
             function shareButtonReadSyncer() {
